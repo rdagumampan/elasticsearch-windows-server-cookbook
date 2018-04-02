@@ -16,12 +16,7 @@ The purpose of this entry is to give you a defintive guide in setting up your El
 
 In summary, we will:
 1. Setup ELK stack
-2. Setup plugins and management tools
-
-	- Elasticsearch Head
-	- Elasticsearch HQ
-	- Curator
-
+2. Setup plugins and management tools (Head, HQ, Curator, esix)
 3. Dry-run with demo .NET application/service
 4. Backup log data
 5. Clean-up old log data
@@ -65,14 +60,14 @@ Estimate TAT:
 <br>http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
 <br>Set JAVA_HOME system environment folder
 ```
-/ echo %JAVA_HOME%
+/> echo %JAVA_HOME%
 ```
 6. Download and install **NodeJS** x64
 <br>https://nodejs.org/en/download/
 ```
-/ node -v
-/ npm -v
-/ npm install
+/> node -v
+/> npm -v
+/> npm install
 ```
 7. Download and install **Python** x86/x64
 <br>Choose the Windows MSI installer
@@ -83,7 +78,7 @@ C:\Program Files (x86)\Python34
 C:\Program Files (x86)\Python34\Scripts
 `
 ```
-/ echo %PATH%
+/> echo %PATH%
 ```
 8. Download **Python/pip**
 <br>https://bootstrap.pypa.io/get-pip.py
@@ -103,16 +98,16 @@ C:\Program Files (x86)\Python34\Scripts
 <br>Extract the files into 'c:\elk\'
 <br.Add NSSM install folder to PATH
 ```
-/ echo %PATH%
+/> echo %PATH%
 ```
 
 **Readiness check**
 - At this point you should have access to the following commands in your CMD window
 ```
-- git --help
-- npm -l
-- python --help
-- nssm -help
+/> git --help
+/> npm -l
+/> python --help
+/> nssm -help
 ```
 - You environment system PATH should be
 - Your ELK folder should look like this
@@ -122,18 +117,18 @@ C:\Program Files (x86)\Python34\Scripts
 - **Dry-run ES**
 
 ```
-/ cd elk
-/ cd elasticsearch-6.2.2\bin
-/ elasticsearch.bat
+/> cd elk
+/> cd elasticsearch-6.2.2\bin
+/> elasticsearch.bat
 ```
 
 - **Host ES as windows service**
 
 ```
-/ nssm install "Elasticsearch - Core 6.2.2" c:\elk\elasticsearch-6.2.2\bin\elasticsearch.bat
-/ nssm set "Elasticsearch - Core 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
-/ nssm set "Elasticsearch - Core 6.2.2" Description "Elasticsearch v6.2.2 core services"
-/ nssm start "Elasticsearch - Core 6.2.2"
+/> nssm install "Elasticsearch - Core 6.2.2" c:\elk\elasticsearch-6.2.2\bin\elasticsearch.bat
+/> nssm set "Elasticsearch - Core 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
+/> nssm set "Elasticsearch - Core 6.2.2" Description "Elasticsearch v6.2.2 core services"
+/> nssm start "Elasticsearch - Core 6.2.2"
 ```
 
 **NOTE:** It helps to be explicit on the version of ES. This guide's us in determinining compatbility of our plugins and suppporting software.
@@ -151,17 +146,17 @@ C:\Program Files (x86)\Python34\Scripts
 
 - **Dry-run ES**
 ```
-/ cd elk
-/ cd kibana-6.2.2-windows-x86_64\bin
-/ kibana.bat
+/> cd elk
+/> cd kibana-6.2.2-windows-x86_64\bin
+/> kibana.bat
 ```
 
 - **Host Kibana as windows service**
 ```
-/ nssm install "Elasticsearch - Kibana 6.2.2" c:\elk\kibana-6.2.2-windows-x86_64\bin\kibana.bat
-/ nssm set "Elasticsearch - Kibana 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
-/ nssm set "Elasticsearch - Kibana 6.2.2" Description "Kibana lets you visualize your Elasticsearch data"
-/ nssm start "Elasticsearch - Kibana 6.2.2"
+/> nssm install "Elasticsearch - Kibana 6.2.2" c:\elk\kibana-6.2.2-windows-x86_64\bin\kibana.bat
+/> nssm set "Elasticsearch - Kibana 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
+/> nssm set "Elasticsearch - Kibana 6.2.2" Description "Kibana lets you visualize your Elasticsearch data"
+/> nssm start "Elasticsearch - Kibana 6.2.2"
 ```
 
 **NOTE:** It helps to be explicit on the version of Kibana. This guide's us in determinining compatbility of our plugins.
@@ -176,16 +171,16 @@ https://github.com/mobz/elasticsearch-head
 
 - **Download and build packages**
 ```
-/ cd elk
-/ git clone git://github.com/mobz/elasticsearch-head.git
-/ cd elasticsearch-head
+/> cd elk
+/> git clone git://github.com/mobz/elasticsearch-head.git
+/> cd elasticsearch-head
 / npm install
 ```
 
 - **Dry-run service**
 ```
-/ npm run start
-/ open http://localhost:9100/
+/> npm run start
+/> open http://localhost:9100/
 ```
 
 - **Allow CORS in ES Core**
@@ -194,16 +189,14 @@ While ES is running, head was not able to connect to ES because CORS request is 
 
 ES disabled CORS requests by default from version 5.x. To make work with Head,  edit elasticsearch.yml and restart elasticsearch service.
 ```
-/ cd elk
-/ cd elasticsearch-6.2.2\config
-/ notepad++ elasticsearch.yml
+/> cd elk
+/> cd elasticsearch-6.2.2\config
+/> notepad++ elasticsearch.yml
 ```
-
 	http.cors.enabled: true
 	http.cors.allow-origin: "*"
-
 ``
-/ nssm restart "Elasticsearch - Core 6.2.2"
+/> nssm restart "Elasticsearch - Core 6.2.2"
 ``
 
 The gree cluster health indicator shows we have successfully paired Head with ES core.This means other plugins may not be able to connect to ES API.
@@ -213,9 +206,9 @@ Because we using ES v6.x, we have to host Head independent from ES web server. I
 
 On new CMD window:
 ```
-/ cd c:\elk\elasticsearch-head
-/ copy NUL RunMe.bat
-/ notepad++ Runme.bat
+/> cd c:\elk\elasticsearch-head
+/> copy NUL RunMe.bat
+/> notepad++ Runme.bat
 ```
 
 Put this code into RunMe.bat and save
@@ -226,11 +219,11 @@ npm start
 
 On new CMD window:
 ```
-/ cd c:\elk\elasticsearch-head
-/ nssm install "Elasticsearch - Head" c:\elk\elasticsearch-head\runme.bat
-/ nssm set "Elasticsearch - Head" Start "SERVICE_DELAYED_AUTO_START"
-/ nssm set "Elasticsearch - Head" Description "Head plugin for Elasticsearch"
-/ nssm start "Elasticsearch - Head"
+/> cd c:\elk\elasticsearch-head
+/> nssm install "Elasticsearch - Head" c:\elk\elasticsearch-head\runme.bat
+/> nssm set "Elasticsearch - Head" Start "SERVICE_DELAYED_AUTO_START"
+/> nssm set "Elasticsearch - Head" Description "Head plugin for Elasticsearch"
+/> nssm start "Elasticsearch - Head"
 ```
 
 #### 2. Elastic HQ
@@ -239,10 +232,10 @@ http://www.elastichq.org/gettingstarted.html
 - **Download and build packages**
 On new CMD window:
 ```
-/ cd elk
-/ git clone https://github.com/ElasticHQ/elasticsearch-HQ.git
-/ cd elasticsearch-hq
-/ npm install
+/> cd elk
+/> git clone https://github.com/ElasticHQ/elasticsearch-HQ.git
+/> cd elasticsearch-hq
+/> npm install
 ```
 
 Get the latest version of PIP
@@ -250,13 +243,13 @@ Download and place this file on C:\Program Files (x86)\Python 34\Tools\Scripts
 https://bootstrap.pypa.io/get-pip.py
 
 ```
-/ python C:\Program Files (x86)\Python 34\Tools\Scripts\get-pip.py
-/ pip install -r requirements.txt
+/> python C:\Program Files (x86)\Python 34\Tools\Scripts\get-pip.py
+/> pip install -r requirements.txt
 ```
 
 - **Dry-run service**
 ```
-/ python application.py
+/> python application.py
 ```
 
 http://localhost:5000/
@@ -266,9 +259,9 @@ http://localhost:5000/api
 
 On new CMD window:
 ```
-/ cd c:\elk\elasticsearch-hq
-/ copy NUL RunMe.bat
-/ notepad++ Runme.bat
+/> cd c:\elk\elasticsearch-hq
+/> copy NUL RunMe.bat
+/> notepad++ Runme.bat
 ```
 
 Put this code into RunMe.bat and save
@@ -278,11 +271,11 @@ python application.py
 ```
 
 ```
-/ cd <elasticsearch-hq-folder>
-/ nssm install "Elasticsearch - HQ" c:\elk\elasticsearch-hq\runme.bat
-/ nssm set "Elasticsearch - HQ" Start "SERVICE_DELAYED_AUTO_START"
-/ nssm set "Elasticsearch - HQ" Description "Elasticsearch-HQ plugin for Elasticsearch"
-/ nssm start "Elasticsearch - HQ"
+/> cd <elasticsearch-hq-folder>
+/> nssm install "Elasticsearch - HQ" c:\elk\elasticsearch-hq\runme.bat
+/> nssm set "Elasticsearch - HQ" Start "SERVICE_DELAYED_AUTO_START"
+/> nssm set "Elasticsearch - HQ" Description "Elasticsearch-HQ plugin for Elasticsearch"
+/> nssm start "Elasticsearch - HQ"
 ```
 
 ### VI. Challenges
