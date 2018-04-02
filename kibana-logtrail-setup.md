@@ -1,5 +1,5 @@
-LogTrail
-https://github.com/sivasamyk/logtrail
+
+### Setting-up Kibana/LogTrail plugin
 
 Baretail is one of my best-loved tools in taling logs but this has to go when we use ElasticSearch. It's great that someone made great work to support this in Kibana as plugin, hats-off to @sivasamyk
 
@@ -7,14 +7,17 @@ Pre-requisite:
 	- We need the exact version of Kibana you're running, in my case I had v6.2.2. To view releases that matches your installation visit this https://github.com/sivasamyk/logtrail/releases
 	- We will re-use the log format in the previous demo project HelloworldElk
 
-On new CMD window
+#### Installation Steps
+
+- On new CMD window__
 ```
 /> cd elk\kibana-6.2.2-windows-x86_64\bin
 /> kibana-plugin install https://github.com/sivasamyk/logtrail/releases/download/v0.1.27/logtrail-6.2.2-0.1.27.zip
 ```
 
-Configure the settindir/ cd elk\kibana-6.2.2-windows-x86_64\plugins\logtrail
+- Configure the tail settings
 ```
+/> cd elk\kibana-6.2.2-windows-x86_64\plugins\logtrail
 /> copy logtrail.json logtrail_backup.json
 /> notepad++ logtrail.json
 ```
@@ -51,15 +54,22 @@ Configure the settindir/ cd elk\kibana-6.2.2-windows-x86_64\plugins\logtrail
 }
 ```
 
-Restart Kibana and wait for few seconds
+- Restart Kibana and wait for few seconds
 ```
 /> nssm restart "Elasticsearch - Kibana 6.2.2"
 ```
 
+- Verify if its working
+
 ![test](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/screenshot-kibana-plugin-logtrail.PNG "")
 
-Watch-out for:
+#### Watch-out for
+
 If after configuring plugin, Kibana became inaccessible, its probobly dead.If you have syntax error in the logtrail.json file, it will crash Kibana.To figure out the error, stop Kibana service and run as console from CMD. It will show the error.
 
-References:
+#### References:
 
+- https://github.com/sivasamyk/logtrail
+- https://www.baremetalsoft.com/baretail/
+
+v0.1.0
