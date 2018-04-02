@@ -1,4 +1,4 @@
-#### Background
+### Background
 
 In my team, we have setup principle that we should "keep our hands off" from the application servers. The idea is to manage as much as possible from a automation scripts or GUI to reduce risk of human errors. Each active RDP session also consumes precious RAM and CPU from application servers. And the first thing that drives developers to the server is checking log files. Let's strike that down.
 
@@ -11,7 +11,7 @@ Now, there are many different ways to achieve a cetralized logging infrastructur
 
 While we are evaluating AppInsights and AppDynamics at enterprise level, I can't can't wait before something gets signed. We got to do something as our services grows every sprint. We are moving to ELK.
 
-#### Objectstives
+### Objectstives
 The purpose of this entry is to give you a defintive guide in setting up your Elasticsearch+Logstach+KIbana (ELK) stack on an on-premise servers including my preferred open source plugins and management tools. The guide will not cover securing your nodes and using commercial tools like x-pack, sematext as I think they deserve a entry. 
 
 In summary, we will:
@@ -35,7 +35,7 @@ Important:
 Estimate TAT:
 - 2 hours
 
-#### Install required runtime and supporting tools
+### Install required runtime and supporting tools
 
 1. Fire-up your windows server
 2. Run CMD as Administrator mode
@@ -97,7 +97,7 @@ C:\Program Files (x86)\Python34\Scripts
 / echo %PATH%
 ```
 
-#### Readiness check
+### Readiness check
 
 - At this point you should have access to the following commands in your Command Prompt window
 ```
@@ -108,8 +108,9 @@ C:\Program Files (x86)\Python34\Scripts
 ```
 - You environment system PATH should be
 - Your ELK folder should look like this
-- Install ELK stack
-- Install Elasticsearch 6.2.2
+
+### Install ELK stack
+#### 1. Install Elasticsearch 6.2.2
 
 **Dry-run ES**
 ```
@@ -137,7 +138,7 @@ http://osi2553:9200/_cat/indices?v
 Check ES nodes status
 http://osi2553:9200/_nodes?pretty=true
 
-Install Kibana 6.2.2
+#### 2. Install Kibana 6.2.2
 
 Dry-run ES
 ```
@@ -159,9 +160,9 @@ It helps to be explicit on the version of Kibana. This guide's us in determinini
 Run Kibana (a nodeJS app)
 http://localhost:5601/
 
-Install ELK tools and Kibana plugins
+## Install ELK tools and Kibana plugins
 
-Head
+#### Head
 https://github.com/mobz/elasticsearch-head
 
 Download and build packages
@@ -223,7 +224,7 @@ On new CMD window:
 / nssm start "Elasticsearch - Head"
 ```
 
-Elastic HQ
+#### Elastic HQ
 http://www.elastichq.org/gettingstarted.html
 
 Download and build packages
@@ -261,7 +262,7 @@ On new CMD window:
 / notepad++ Runme.bat
 ```
 
-#Put this code into RunMe.bat and save
+Put this code into RunMe.bat and save
 ```
 cd /d %~dp0
 python application.py
@@ -275,36 +276,40 @@ python application.py
 / nssm start "Elasticsearch - HQ"
 ```
 
-#### Challenges
-
+### Challenges
 - Since ES has removed direct suppport for plugins from 5.x, it has been lotmore difficult to setup plugins for ES. We are given two choices, to configure the plugin as native to Kibana or self-host in a web server.
 
 - ELK tools are very much dependent to the version of ES. This means we need to always keep in an eye to compatibility matrix to make sure we dont' break things when we upgrade ES or the plugins we use.
 
 - Several open tools requires that we build the packages ourself. Because they are built from different tools, we have to prepare and install their dependencies like python, pip, setuptools, cx_Freeze etc...
 
-#### FAQ
+### FAQ
 
-#### Next Steps
+### Next Steps
+- Verify setup with demo microservice
+- Tail logs with **LogTrail**
+- Maintaining indices with **curator** or my pet project **esix**
 
-#### Feedback
-Twitter: @rdagumampan
-Email: rdagumampan|AT|gmail.com
+### Feedback
+- Twitter: @rdagumampan
+- Email: rdagumampan|AT|gmail.com
 
-#### References
+### References
 Plugins
-https://www.elastic.co/guide/en/kibana/current/known-plugins.html
+<br>https://www.elastic.co/guide/en/kibana/current/known-plugins.html
 
 Management and monitoring
-https://signalfx.com/blog/how-we-monitor-and-run-elasticsearch-at-scale/
-https://medium.com/@dionnis/elasticsearch-monitoring-and-maintenance-tools-research-18c5fb45a747
+<br>https://signalfx.com/blog/how-we-monitor-and-run-elasticsearch-at-scale/
+<br>https://medium.com/@dionnis/elasticsearch-monitoring-and-maintenance-tools-research-18c5fb45a747
 
 Elasticeach metrics to watch
-https://www.oreilly.com/ideas/10-elasticsearch-metrics-to-watch
+<br>https://www.oreilly.com/ideas/10-elasticsearch-metrics-to-watch
 
-http://ikeptwalking.com/structured-logging-using-serilog/
-https://bitnami.com/stack/elk/installer
-https://logz.io/learn/complete-guide-elk-stack/
-https://qbox.io/blog/how-to-elasticsearch-logstash-kibana-manage-logs
+<br>http://ikeptwalking.com/structured-logging-using-serilog/
+<br>https://bitnami.com/stack/elk/installer
+<br>https://logz.io/learn/complete-guide-elk-stack/
+<br>https://qbox.io/blog/how-to-elasticsearch-logstash-kibana-manage-logs
 
-https://code972.com/blog/2016/04/97-the-definitive-guide-for-elasticsearch-2-x-on-microsoft-azure
+<br>https://code972.com/blog/2016/04/97-the-definitive-guide-for-elasticsearch-2-x-on-microsoft-azure
+
+v0.1.0
