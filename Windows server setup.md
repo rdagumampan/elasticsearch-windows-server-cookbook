@@ -1,4 +1,4 @@
-ALT-Background
+Background
 ------
 
 In my team, we have setup principle that we should "keep our hands off" from the application servers. The idea is to manage as much as possible from a automation scripts or GUI to reduce risk of human errors. Each active RDP session also consumes precious RAM and CPU from application servers. And the first thing that drives developers to the server is checking log files. Let's strike that down.
@@ -12,7 +12,7 @@ Now, there are many different ways to achieve a cetralized logging infrastructur
 
 While we are evaluating AppInsights and AppDynamics at enterprise level, I can't can't wait before something gets signed. We got to do something as our services grows every sprint. We are moving to ELK.
 
-ALT-Objectives
+Objectives
 ------
 
 The purpose of this entry is to give you a defintive guide in setting up your Elasticsearch+Logstach+KIbana (ELK) stack on an on-premise servers including my preferred open source plugins and management tools. The guide will not cover securing your nodes and using commercial tools like x-pack, sematext as I think they deserve another entry. 
@@ -38,7 +38,7 @@ Important:
 Estimate TAT:
 - 2 hours
 
-ALT-Install required runtime and supporting tools
+Install required runtime and supporting tools
 ------
 
 1. Fire-up your windows server
@@ -116,39 +116,37 @@ C:\Program Files (x86)\Python34\Scripts
 - You environment system PATH should be
 - Your ELK folder should look like this
 
-ALT-Install ELK stack
+Install ELK stack
 ------
 
 #### Install Elasticsearch 6.2.2
+* __Dry-run ES__
+	- On new CMD window:
+	```
+	/> cd elk
+	/> cd elasticsearch-6.2.2\bin
+	/> elasticsearch.bat
+	```
+	- Terminate CMD window
 
-Dry-run ES**
-On new CMD window:
-```
-/> cd elk
-/> cd elasticsearch-6.2.2\bin
-/> elasticsearch.bat
-```
+* __Host ES as windows service__
+	- On new CMD window:
+	```
+	/> nssm install "Elasticsearch - Core 6.2.2" c:\elk\elasticsearch-6.2.2\bin\elasticsearch.bat
+	/> nssm set "Elasticsearch - Core 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
+	/> nssm set "Elasticsearch - Core 6.2.2" Description "Elasticsearch v6.2.2 core services"
+	/> nssm start "Elasticsearch - Core 6.2.2"
+	```
+	- Terminate CMD window
 
-Host ES as windows service
+	**NOTE:** It helps to be explicit on the version of ES. This guide's us in determinining compatbility of our plugins and suppporting software.
 
-On new CMD window:
-```
-/> nssm install "Elasticsearch - Core 6.2.2" c:\elk\elasticsearch-6.2.2\bin\elasticsearch.bat
-/> nssm set "Elasticsearch - Core 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
-/> nssm set "Elasticsearch - Core 6.2.2" Description "Elasticsearch v6.2.2 core services"
-/> nssm start "Elasticsearch - Core 6.2.2"
-```
-
-**NOTE:** It helps to be explicit on the version of ES. This guide's us in determinining compatbility of our plugins and suppporting software.
-
-Run ES (via PostMan)
-http://localhost:9200/
-
-Check ES cluster status
-http://localhost:9200/_cat/indices?v
-
-Check ES nodes status
-http://localhost:9200/_nodes?pretty=true
+	- Run ES (via PostMan)
+	<br>http://localhost:9200/
+	- Check ES cluster status
+	http://localhost:9200/_cat/indices?v
+	- Check ES nodes status
+	<br>http://localhost:9200/_nodes?pretty=true
 
 #### 2. Install Kibana 6.2.2
 
@@ -176,7 +174,7 @@ On new CMD window:
 ...Run Kibana
 ...http://localhost:5601/
 
-ALT-Install ELK tools and Kibana plugins
+Install ELK tools and Kibana plugins
 ------
 
 #### 1. Head
@@ -302,28 +300,29 @@ On new CMD window:
 /> nssm start "Elasticsearch - HQ"
 ```
 
-ALT-Noted Challenges
+Noted Challenges
 ------
+
 - Since ES has removed direct suppport for plugins from 5.x, it has been lotmore difficult to setup plugins for ES. We are given two choices: setup plugin as native to Kibana or self-host in a web server.
 
 - ELK tools are very much dependent to the version of ES. This means we need to always keep an eye on the compatibility matrix to make sure we dont' break things when we upgrade ES or the plugins we use.
 
 - Several open tools requires that we build the packages ourself. Because they are built from different tools, we have to prepare and install their dependencies like python, pip, setuptools, cx_Freeze etc...
 
-ALT-Next Steps
+Next Steps
 ------
 
 - Verify setup with demo microservice
 - Tail logs with **LogTrail**
 - Maintaining indices with **curator** or my pet project **esix**
 
-ALT-Feedback
+Feedback
 ------
 
 - Twitter: @rdagumampan
 - Email: rdagumampan|AT|gmail.com
 
-ALT-References
+References
 ------
 
 Kibana Plugins
