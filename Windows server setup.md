@@ -1,4 +1,5 @@
-### I. Background
+### Background
+------
 
 In my team, we have setup principle that we should "keep our hands off" from the application servers. The idea is to manage as much as possible from a automation scripts or GUI to reduce risk of human errors. Each active RDP session also consumes precious RAM and CPU from application servers. And the first thing that drives developers to the server is checking log files. Let's strike that down.
 
@@ -11,7 +12,9 @@ Now, there are many different ways to achieve a cetralized logging infrastructur
 
 While we are evaluating AppInsights and AppDynamics at enterprise level, I can't can't wait before something gets signed. We got to do something as our services grows every sprint. We are moving to ELK.
 
-### II. Objectives
+### Objectives
+------
+
 The purpose of this entry is to give you a defintive guide in setting up your Elasticsearch+Logstach+KIbana (ELK) stack on an on-premise servers including my preferred open source plugins and management tools. The guide will not cover securing your nodes and using commercial tools like x-pack, sematext as I think they deserve another entry. 
 
 In summary, we will:
@@ -115,8 +118,7 @@ C:\Program Files (x86)\Python34\Scripts
 ### IV. Install ELK stack
 #### Install Elasticsearch 6.2.2
 
-- **Dry-run ES**
-
+Dry-run ES**
 On new CMD window:
 ```
 /> cd elk
@@ -124,7 +126,7 @@ On new CMD window:
 /> elasticsearch.bat
 ```
 
-- **Host ES as windows service**
+Host ES as windows service
 
 On new CMD window:
 ```
