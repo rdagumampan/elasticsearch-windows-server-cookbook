@@ -127,6 +127,7 @@ Install ELK stack
 	/> cd elasticsearch-6.2.2\bin
 	/> elasticsearch.bat
 	```
+	- On your browse, open `http://localhost:9200/`
 	- Terminate CMD window
 
 * __Host ES as windows service__
@@ -137,42 +138,37 @@ Install ELK stack
 	/> nssm set "Elasticsearch - Core 6.2.2" Description "Elasticsearch v6.2.2 core services"
 	/> nssm start "Elasticsearch - Core 6.2.2"
 	```
+	- On your browser, open `http://localhost:9200/`
+	- Check ES cluster status `http://localhost:9200/_cat/indices?v`
+	- Check ES nodes status `http://localhost:9200/_nodes?pretty=true`
 	- Terminate CMD window
 
 	**NOTE:** It helps to be explicit on the version of ES. This guide's us in determinining compatbility of our plugins and suppporting software.
 
-	- Run ES (via PostMan)
-	<br>http://localhost:9200/
-	- Check ES cluster status
-	http://localhost:9200/_cat/indices?v
-	- Check ES nodes status
-	<br>http://localhost:9200/_nodes?pretty=true
+#### Install Kibana 6.2.2
 
-#### 2. Install Kibana 6.2.2
+* __Dry-run Kibana__
+	- On new CMD window:
+	```
+	/> cd elk
+	/> cd kibana-6.2.2-windows-x86_64\bin
+	/> kibana.bat
+	```
+	- On your browser, open `http://localhost:5601/`
+	- Terminate CMD window
 
-- **Dry-run ES**
+* __Host Kibana as windows service__
+	- On new CMD window:
+	```
+	/> nssm install "Elasticsearch - Kibana 6.2.2" c:\elk\kibana-6.2.2-windows-x86_64\bin\kibana.bat
+	/> nssm set "Elasticsearch - Kibana 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
+	/> nssm set "Elasticsearch - Kibana 6.2.2" Description "Kibana lets you visualize your Elasticsearch data"
+	/> nssm start "Elasticsearch - Kibana 6.2.2"
+	```
+	- On your browser, open `http://localhost:5601/`
+	- Terminate CMD window
 
-On new CMD window:
-```
-/> cd elk
-/> cd kibana-6.2.2-windows-x86_64\bin
-/> kibana.bat
-```
-
-- **Host Kibana as windows service**
-
-On new CMD window:
-```
-/> nssm install "Elasticsearch - Kibana 6.2.2" c:\elk\kibana-6.2.2-windows-x86_64\bin\kibana.bat
-/> nssm set "Elasticsearch - Kibana 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
-/> nssm set "Elasticsearch - Kibana 6.2.2" Description "Kibana lets you visualize your Elasticsearch data"
-/> nssm start "Elasticsearch - Kibana 6.2.2"
-```
-
-**NOTE:** It helps to be explicit on the version of Kibana. This guide's us in determinining compatbility of our plugins.
-
-...Run Kibana
-...http://localhost:5601/
+	**NOTE:** It helps to be explicit on the version of Kibana. This guide's us in determinining compatbility of our plugins.
 
 Install ELK tools and Kibana plugins
 ------
