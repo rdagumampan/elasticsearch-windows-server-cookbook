@@ -11,6 +11,7 @@ Now, there are many different ways to achieve a cetralized logging infrastructur
 
 While we are evaluating AppInsights and AppDynamics at enterprise level, I can't can't wait before something gets signed. We got to do something as our services grows every sprint. We are moving to ELK.
 
+### Objectstives
 The purpose of this entry is to give you a defintive guide in setting up your Elasticsearch+Logstach+KIbana (ELK) stack on an on-premise servers including my preferred open source plugins and management tools. The guide will not cover securing your nodes and using commercial tools like x-pack, sematext as I think they deserve a entry. 
 
 In summary, we will:
@@ -36,8 +37,8 @@ Estimate TAT:
 
 #### Install required runtime and supporting tools
 
-1. Get a clean machine up and running
-2. Run CMD as Administrator
+1. Fire-up your windows server
+2. Run CMD as Administrator mode
 ```
 / d:
 / md elk
@@ -46,71 +47,57 @@ Estimate TAT:
 / md _installers
 ```
 3. Download git for windows x64
-
-...*Download from  https://git-scm.com/download/win
-
+<br>https://git-scm.com/download/win
 4. Download Notepad++ x64
-	https://notepad-plus-plus.org/download/v7.5.6.html
-
-Add Notepad++ path to PATH
-C:\Program Files\Notepad++
-
-Download and install JRE x64
-http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
-
-Set JAVA_HOME system environment folder
+<br>https://notepad-plus-plus.org/download/v7.5.6.html
+<br>Add Notepad++ path to PATH
+`C:\Program Files\Notepad++`
+5. Download and install JRE x64
+<br>http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
+<br>Set JAVA_HOME system environment folder
+```
 / echo %JAVA_HOME%
-
-
-
-Download and install NodeJS x64
-https://nodejs.org/en/download/
-
+```
+6. Download and install NodeJS x64
+<br>https://nodejs.org/en/download/
 ```
 / node -v
 / npm -v
 / npm install
 ```
-
-Install Python x86/x64
-https://www.python.org/downloads/
-https://www.python.org/downloads/release/python-342/
-
-Choose the Windows MSI installer
-
-
-Add Python into PATH
+7. Download Python x86/x64
+<br>Choose the Windows MSI installer
+<br>https://www.python.org/downloads/
+<br>Add Python into PATH
+`
 C:\Program Files (x86)\Python34
 C:\Program Files (x86)\Python34\Scripts
+`
+```
+/ echo %PATH%
+```
+8. Download Python/pip
+<br>https://bootstrap.pypa.io/get-pip.py
 
+9. Download ES 6.2.2
+<br>https://www.elastic.co/downloads/elasticsearch
+<br>Extract files into `C:\elk\`
+
+10. Download Kibana 6.2.2
+<br>https://www.elastic.co/downloads/kibana
+<br>Extract file into `C:\elk\`
+
+11. Download NSSM
+<br>NSSM is required to make it so "Logstash" and "Kibana" can run as windows services.
+<br>https://nssm.cc/download
+<br>Extract the files into 'c:\elk\'
+<br.Add NSSM install folder to PATH
 ```
 / echo %PATH%
 ```
 
-Install Python/pip
-https://bootstrap.pypa.io/get-pip.py
-https://pip.pypa.io/en/stable/
+#### Readiness check
 
-Download ES 6.2.2
-Download package from https://www.elastic.co/downloads/elasticsearch
-
-Extract files into C:\elk\
-
-Download Kibana 6.2.2
-Download package from https://www.elastic.co/downloads/kibana
-Extract file into C:\elk\
-
-Download NSSM
-NSSM is required to make it so "Logstash" and "Kibana" can run as windows services.
-Download packages from https://nssm.cc/download
-Extract the files into c:\elk\
-
-Add NSSM install folder to PATH
-```
-/ echo %PATH%
-```
-
-Readiness check
 At this point you should have access to the following commands in your Command Prompt window
 
 ```
@@ -131,7 +118,7 @@ Dry-run ES
 / elasticsearch.bat
 ```
 
-Host ES as windows service
+Host ES as windows service
  ```
 / nssm install "Elasticsearch - Core 6.2.2" c:\elk\elasticsearch-6.2.2\bin\elasticsearch.bat
 / nssm set "Elasticsearch - Core 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
@@ -297,6 +284,12 @@ python application.py
 - Several open tools requires that we build the packages ourself. Because they are built from different tools, we have to prepare and install their dependencies like python, pip, setuptools, cx_Freeze etc...
 
 #### FAQ
+
+#### Next Steps
+
+#### Feedback
+Twitter: @rdagumampan
+Email: rdagumampan|AT|gmail.com
 
 #### References
 Plugins
