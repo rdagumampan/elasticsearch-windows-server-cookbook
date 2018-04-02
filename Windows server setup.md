@@ -38,6 +38,7 @@ Estimate TAT:
 ### III. Install required runtime and supporting tools
 
 1. Fire-up your windows server
+
 2. Run CMD as Administrator mode
 ```
 / d:
@@ -46,13 +47,16 @@ Estimate TAT:
 / md _bin
 / md _installers
 ```
+
 3. Download and install **git** for windows x64
 <br>https://git-scm.com/download/win
+
 4. Download and install **Notepad++** x64
 <br>https://notepad-plus-plus.org/download/v7.5.6.html
 <br>Add Notepad++ path to PATH
 `C:\Program Files\Notepad++`
-5. Download and install JRE x64
+
+5. Download and install **JRE** x64
 <br>http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
 <br>Set JAVA_HOME system environment folder
 ```
@@ -76,7 +80,7 @@ C:\Program Files (x86)\Python34\Scripts
 ```
 / echo %PATH%
 ```
-8. Download Python/pip
+8. Download **Python/pip**
 <br>https://bootstrap.pypa.io/get-pip.py
 <br>Copy file into `C:\Program Files (x86)\Python34\Scripts`
 
@@ -98,8 +102,7 @@ C:\Program Files (x86)\Python34\Scripts
 ```
 
 ### Readiness check
-
-- At this point you should have access to the following commands in your Command Prompt window
+- At this point you should have access to the following commands in your CMD window
 ```
 - git --help
 - npm -l
