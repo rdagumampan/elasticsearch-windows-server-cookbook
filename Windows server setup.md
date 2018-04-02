@@ -113,9 +113,11 @@ C:\Program Files (x86)\Python34\Scripts
 - Your ELK folder should look like this
 
 ### IV. Install ELK stack
-#### 1. Install Elasticsearch 6.2.2
+#### Install Elasticsearch 6.2.2
+
 - **Dry-run ES**
 
+On new CMD window:
 ```
 /> cd elk
 /> cd elasticsearch-6.2.2\bin
@@ -124,6 +126,7 @@ C:\Program Files (x86)\Python34\Scripts
 
 - **Host ES as windows service**
 
+On new CMD window:
 ```
 /> nssm install "Elasticsearch - Core 6.2.2" c:\elk\elasticsearch-6.2.2\bin\elasticsearch.bat
 /> nssm set "Elasticsearch - Core 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
@@ -133,18 +136,20 @@ C:\Program Files (x86)\Python34\Scripts
 
 **NOTE:** It helps to be explicit on the version of ES. This guide's us in determinining compatbility of our plugins and suppporting software.
 
-...Run ES (via PostMan)
-...http://localhost:9200/
+Run ES (via PostMan)
+http://localhost:9200/
 
-...Check ES cluster status
-...http://localhost:9200/_cat/indices?v
+Check ES cluster status
+http://localhost:9200/_cat/indices?v
 
-...Check ES nodes status
-...http://localhost:9200/_nodes?pretty=true
+Check ES nodes status
+http://localhost:9200/_nodes?pretty=true
 
 #### 2. Install Kibana 6.2.2
 
 - **Dry-run ES**
+
+On new CMD window:
 ```
 /> cd elk
 /> cd kibana-6.2.2-windows-x86_64\bin
@@ -152,6 +157,8 @@ C:\Program Files (x86)\Python34\Scripts
 ```
 
 - **Host Kibana as windows service**
+
+On new CMD window:
 ```
 /> nssm install "Elasticsearch - Kibana 6.2.2" c:\elk\kibana-6.2.2-windows-x86_64\bin\kibana.bat
 /> nssm set "Elasticsearch - Kibana 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
@@ -169,15 +176,19 @@ C:\Program Files (x86)\Python34\Scripts
 #### 1. Head
 https://github.com/mobz/elasticsearch-head
 
-- **Download and build packages**
-```
-/> cd elk
-/> git clone git://github.com/mobz/elasticsearch-head.git
-/> cd elasticsearch-head
-/ npm install
-```
+	- **Download and build packages**
+
+	On new CMD window:
+	```
+	/> cd elk
+	/> git clone git://github.com/mobz/elasticsearch-head.git
+	/> cd elasticsearch-head
+	/ npm install
+	```
 
 - **Dry-run service**
+
+On new CMD window:
 ```
 /> npm run start
 /> open http://localhost:9100/
@@ -188,6 +199,8 @@ https://github.com/mobz/elasticsearch-head
 While ES is running, head was not able to connect to ES because CORS request is disabled by default. We need to reconfigure ES allow CORS reqyests.
 
 ES disabled CORS requests by default from version 5.x. To make work with Head,  edit elasticsearch.yml and restart elasticsearch service.
+
+On new CMD window:
 ```
 /> cd elk
 /> cd elasticsearch-6.2.2\config
@@ -230,6 +243,7 @@ On new CMD window:
 http://www.elastichq.org/gettingstarted.html
 
 - **Download and build packages**
+
 On new CMD window:
 ```
 /> cd elk
@@ -242,12 +256,15 @@ Get the latest version of PIP
 Download and place this file on C:\Program Files (x86)\Python 34\Tools\Scripts
 https://bootstrap.pypa.io/get-pip.py
 
+On new CMD window:
 ```
 /> python C:\Program Files (x86)\Python 34\Tools\Scripts\get-pip.py
 /> pip install -r requirements.txt
 ```
 
 - **Dry-run service**
+
+On new CMD window:
 ```
 /> python application.py
 ```
@@ -270,6 +287,7 @@ cd /d %~dp0
 python application.py
 ```
 
+On new CMD window:
 ```
 /> cd <elasticsearch-hq-folder>
 /> nssm install "Elasticsearch - HQ" c:\elk\elasticsearch-hq\runme.bat
@@ -278,14 +296,12 @@ python application.py
 /> nssm start "Elasticsearch - HQ"
 ```
 
-### VI. Challenges
-- Since ES has removed direct suppport for plugins from 5.x, it has been lotmore difficult to setup plugins for ES. We are given two choices, to configure the plugin as native to Kibana or self-host in a web server.
+### VI. Noted Challenges
+- Since ES has removed direct suppport for plugins from 5.x, it has been lotmore difficult to setup plugins for ES. We are given two choices: setup plugin as native to Kibana or self-host in a web server.
 
-- ELK tools are very much dependent to the version of ES. This means we need to always keep in an eye to compatibility matrix to make sure we dont' break things when we upgrade ES or the plugins we use.
+- ELK tools are very much dependent to the version of ES. This means we need to always keep an eye on the compatibility matrix to make sure we dont' break things when we upgrade ES or the plugins we use.
 
 - Several open tools requires that we build the packages ourself. Because they are built from different tools, we have to prepare and install their dependencies like python, pip, setuptools, cx_Freeze etc...
-
-### VII. FAQ
 
 ### VIII. Next Steps
 - Verify setup with demo microservice
