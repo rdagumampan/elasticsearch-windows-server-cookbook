@@ -46,11 +46,11 @@ Estimate TAT:
 
 2. Run CMD as Administrator mode
 ```
-/ d:
-/ md elk
-/ cd elk
-/ md _bin
-/ md _installers
+/> d:
+/> md elk
+/> cd elk
+/> md _bin
+/> md _installers
 ```
 
 3. Download and install **git** for windows x64
