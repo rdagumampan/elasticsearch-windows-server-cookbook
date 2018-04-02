@@ -11,7 +11,7 @@ Now, there are many different ways to achieve a cetralized logging infrastructur
 
 While we are evaluating AppInsights and AppDynamics at enterprise level, I can't can't wait before something gets signed. We got to do something as our services grows every sprint. We are moving to ELK.
 
-### Objectstives
+#### Objectstives
 The purpose of this entry is to give you a defintive guide in setting up your Elasticsearch+Logstach+KIbana (ELK) stack on an on-premise servers including my preferred open source plugins and management tools. The guide will not cover securing your nodes and using commercial tools like x-pack, sematext as I think they deserve a entry. 
 
 In summary, we will:
@@ -46,9 +46,9 @@ Estimate TAT:
 / md _bin
 / md _installers
 ```
-3. Download git for windows x64
+3. Download and install **git** for windows x64
 <br>https://git-scm.com/download/win
-4. Download Notepad++ x64
+4. Download and install **Notepad++** x64
 <br>https://notepad-plus-plus.org/download/v7.5.6.html
 <br>Add Notepad++ path to PATH
 `C:\Program Files\Notepad++`
@@ -58,14 +58,14 @@ Estimate TAT:
 ```
 / echo %JAVA_HOME%
 ```
-6. Download and install NodeJS x64
+6. Download and install **NodeJS** x64
 <br>https://nodejs.org/en/download/
 ```
 / node -v
 / npm -v
 / npm install
 ```
-7. Download Python x86/x64
+7. Download and install **Python** x86/x64
 <br>Choose the Windows MSI installer
 <br>https://www.python.org/downloads/
 <br>Add Python into PATH
@@ -78,12 +78,13 @@ C:\Program Files (x86)\Python34\Scripts
 ```
 8. Download Python/pip
 <br>https://bootstrap.pypa.io/get-pip.py
+<br>Copy file into `C:\Program Files (x86)\Python34\Scripts`
 
-9. Download ES 6.2.2
+9. Download **ElasticSearch** 6.2.2
 <br>https://www.elastic.co/downloads/elasticsearch
 <br>Extract files into `C:\elk\`
 
-10. Download Kibana 6.2.2
+10. Download **Kibana** 6.2.2
 <br>https://www.elastic.co/downloads/kibana
 <br>Extract file into `C:\elk\`
 
@@ -98,28 +99,27 @@ C:\Program Files (x86)\Python34\Scripts
 
 #### Readiness check
 
-At this point you should have access to the following commands in your Command Prompt window
-
+- At this point you should have access to the following commands in your Command Prompt window
 ```
 - git --help
 - npm -l
 - python --help
 - nssm -help
 ```
-You environment system PATH should be
-Your ELK folder should look like this
-Install ELK stack
-Install Elasticsearch 6.2.2
+- You environment system PATH should be
+- Your ELK folder should look like this
+- Install ELK stack
+- Install Elasticsearch 6.2.2
 
-Dry-run ES
+**Dry-run ES**
 ```
 / cd elk
 / cd elasticsearch-6.2.2\bin
 / elasticsearch.bat
 ```
 
-Host ES as windows service
- ```
+**Host ES as windows service**
+```
 / nssm install "Elasticsearch - Core 6.2.2" c:\elk\elasticsearch-6.2.2\bin\elasticsearch.bat
 / nssm set "Elasticsearch - Core 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
 / nssm set "Elasticsearch - Core 6.2.2" Description "Elasticsearch v6.2.2 core services"
