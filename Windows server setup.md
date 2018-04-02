@@ -12,12 +12,17 @@ Now, there are many different ways to achieve a cetralized logging infrastructur
 While we are evaluating AppInsights and AppDynamics at enterprise level, I can't can't wait before something gets signed. We got to do something as our services grows every sprint. We are moving to ELK.
 
 ### II. Objectives
-The purpose of this entry is to give you a defintive guide in setting up your Elasticsearch+Logstach+KIbana (ELK) stack on an on-premise servers including my preferred open source plugins and management tools. The guide will not cover securing your nodes and using commercial tools like x-pack, sematext as I think they deserve a entry. 
+The purpose of this entry is to give you a defintive guide in setting up your Elasticsearch+Logstach+KIbana (ELK) stack on an on-premise servers including my preferred open source plugins and management tools. The guide will not cover securing your nodes and using commercial tools like x-pack, sematext as I think they deserve another entry. 
 
 In summary, we will:
 1. Setup ELK stack
 2. Setup plugins and management tools
-3. Integrate with .NET service
+
+	- Elasticsearch Head
+	- Elasticsearch HQ
+	- Curator
+
+3. Dry-run with demo .NET application/service
 4. Backup log data
 5. Clean-up old log data
 6. Recommend further reading
@@ -114,15 +119,16 @@ C:\Program Files (x86)\Python34\Scripts
 
 ### IV. Install ELK stack
 #### 1. Install Elasticsearch 6.2.2
+- **Dry-run ES**
 
-**Dry-run ES**
 ```
 / cd elk
 / cd elasticsearch-6.2.2\bin
 / elasticsearch.bat
 ```
 
-**Host ES as windows service**
+- **Host ES as windows service**
+
 ```
 / nssm install "Elasticsearch - Core 6.2.2" c:\elk\elasticsearch-6.2.2\bin\elasticsearch.bat
 / nssm set "Elasticsearch - Core 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
@@ -130,27 +136,27 @@ C:\Program Files (x86)\Python34\Scripts
 / nssm start "Elasticsearch - Core 6.2.2"
 ```
 
-It helps to be explicit on the version of ES. This guide's us in determinining compatbility of our plugins and suppporting software.
+**NOTE:** It helps to be explicit on the version of ES. This guide's us in determinining compatbility of our plugins and suppporting software.
 
-Run ES (via PostMan)
-http://localhost:9200/
+...Run ES (via PostMan)
+...http://localhost:9200/
 
-Check ES cluster status
-http://osi2553:9200/_cat/indices?v
+...Check ES cluster status
+...http://localhost:9200/_cat/indices?v
 
-Check ES nodes status
-http://osi2553:9200/_nodes?pretty=true
+...Check ES nodes status
+...http://localhost:9200/_nodes?pretty=true
 
 #### 2. Install Kibana 6.2.2
 
-Dry-run ES
+- **Dry-run ES**
 ```
 / cd elk
 / cd kibana-6.2.2-windows-x86_64\bin
 / kibana.bat
 ```
 
-Host Kibana as windows service\
+- **Host Kibana as windows service**
 ```
 / nssm install "Elasticsearch - Kibana 6.2.2" c:\elk\kibana-6.2.2-windows-x86_64\bin\kibana.bat
 / nssm set "Elasticsearch - Kibana 6.2.2" Start "SERVICE_DELAYED_AUTO_START"
@@ -158,17 +164,17 @@ Host Kibana as windows service\
 / nssm start "Elasticsearch - Kibana 6.2.2"
 ```
 
-It helps to be explicit on the version of Kibana. This guide's us in determinining compatbility of our plugins.
+**NOTE:** It helps to be explicit on the version of Kibana. This guide's us in determinining compatbility of our plugins.
 
-Run Kibana (a nodeJS app)
-http://localhost:5601/
+...Run Kibana
+...http://localhost:5601/
 
 ## V. Install ELK tools and Kibana plugins
 
-#### Head
+#### 1. Head
 https://github.com/mobz/elasticsearch-head
 
-Download and build packages
+- **Download and build packages**
 ```
 / cd elk
 / git clone git://github.com/mobz/elasticsearch-head.git
@@ -176,15 +182,15 @@ Download and build packages
 / npm install
 ```
 
-Dry-run service
+- **Dry-run service**
 ```
 / npm run start
 / open http://localhost:9100/
 ```
 
-Allow CORS in ES Core
+- **Allow CORS in ES Core**
 
-NOTE: While ES is running, head was not able to connect to ES because CORS request is disabled by default. We need to reconfigure ES allow CORS reqyests.
+While ES is running, head was not able to connect to ES because CORS request is disabled by default. We need to reconfigure ES allow CORS reqyests.
 
 ES disabled CORS requests by default from version 5.x. To make work with Head,  edit elasticsearch.yml and restart elasticsearch service.
 ```
@@ -202,7 +208,7 @@ ES disabled CORS requests by default from version 5.x. To make work with Head,  
 
 The gree cluster health indicator shows we have successfully paired Head with ES core.This means other plugins may not be able to connect to ES API.
 
-Host as a windows service
+- **Host as a windows service**
 Because we using ES v6.x, we have to host Head independent from ES web server. It's pretty simple with NSSM, but first we need to create a bootstrap file.
 
 On new CMD window:
@@ -212,7 +218,7 @@ On new CMD window:
 / notepad++ Runme.bat
 ```
 
-#Put this code into RunMe.bat and save
+Put this code into RunMe.bat and save
 ```
 cd /d %~dp0
 npm start
@@ -227,10 +233,10 @@ On new CMD window:
 / nssm start "Elasticsearch - Head"
 ```
 
-#### Elastic HQ
+#### 2. Elastic HQ
 http://www.elastichq.org/gettingstarted.html
 
-Download and build packages
+- **Download and build packages**
 On new CMD window:
 ```
 / cd elk
@@ -248,7 +254,7 @@ https://bootstrap.pypa.io/get-pip.py
 / pip install -r requirements.txt
 ```
 
-Dry-run service
+- **Dry-run service**
 ```
 / python application.py
 ```
@@ -256,7 +262,7 @@ Dry-run service
 http://localhost:5000/
 http://localhost:5000/api
 
-Host as a windows service
+- **Host as a windows service**
 
 On new CMD window:
 ```
@@ -298,7 +304,7 @@ python application.py
 - Email: rdagumampan|AT|gmail.com
 
 ### X. References
-Plugins
+Kibana Plugins
 <br>https://www.elastic.co/guide/en/kibana/current/known-plugins.html
 
 Management and monitoring
