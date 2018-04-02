@@ -16,10 +16,10 @@ The purpose of this entry is to give you a defintive guide in setting up your El
 
 In summary, we will:
 1. Setup ELK stack
-2. Setup plugins and management tools (Head, HQ, Curator, esix)
+2. Setup plugins and management tools (Head, HQ, curator, esix)
 3. Dry-run with demo .NET application/service
-4. Backup log data
-5. Clean-up old log data
+4. Backup log data (WIP)
+5. Clean-up old log data (WIP)
 6. Recommend further reading
 
 Pre-requsites:
