@@ -54,15 +54,15 @@ Install required runtime and supporting tools
 
 3. Download and install **git** for windows x64
 <br>https://git-scm.com/download/win
+<br>Add git path to PATH system environment variable
 
 4. Download and install **Notepad++** x64
 <br>https://notepad-plus-plus.org/download/v7.5.6.html
-<br>Add Notepad++ path to PATH
-`C:\Program Files\Notepad++`
+<br>Add Notepad++ path to PATH system environment variable
 
 5. Download and install **JRE** x64
 <br>http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
-<br>Set JAVA_HOME system environment folder
+<br>Set JAVA_HOME system environment variable
 ```
 /> echo %JAVA_HOME%
 ```
@@ -76,7 +76,7 @@ Install required runtime and supporting tools
 7. Download and install **Python** x86/x64
 <br>Choose the Windows MSI installer
 <br>https://www.python.org/downloads/
-<br>Add Python into PATH
+<br>Add Python path into PATH system environment variable
 `
 C:\Program Files (x86)\Python34
 C:\Program Files (x86)\Python34\Scripts
@@ -100,7 +100,7 @@ C:\Program Files (x86)\Python34\Scripts
 <br>NSSM is required to make it so "Logstash" and "Kibana" can run as windows services.
 <br>https://nssm.cc/download
 <br>Extract the files into 'c:\elk\'
-<br.Add NSSM install folder to PATH
+<br>Add NSSM path to PATH system environment variable
 ```
 /> echo %PATH%
 ```
@@ -113,7 +113,7 @@ C:\Program Files (x86)\Python34\Scripts
 /> python --help
 /> nssm -help
 ```
-- You environment system PATH should be
+- You environment system PATH should have git, Notepad++, NodeJS, Phyton and NSSM 
 - Your ELK folder should look like this
 
 Install ELK stack
@@ -172,129 +172,115 @@ Install ELK stack
 
 Install ELK tools and Kibana plugins
 ------
+Since ES v5.x, ES have have stopped supporting plugins in it core installation.This is to shield ES from attacks and vulnerabilities that may be expose by plugins. This means we have host our plugins independently. It's pretty simple with NSSM, but first we need to create a bootstrap file for each plugins.
 
-#### 1. Head
-https://github.com/mobz/elasticsearch-head
+#### Head
 
-	- **Download and build packages**
-
-	On new CMD window:
+* __Download and build packages__
+	- On new CMD window:
 	```
 	/> cd elk
 	/> git clone git://github.com/mobz/elasticsearch-head.git
 	/> cd elasticsearch-head
 	/ npm install
+	```	
+	- Terminate CMD window
+* __Dry-run service__
+	- On new CMD window:
 	```
-
-- **Dry-run service**
-
-On new CMD window:
-```
-/> npm run start
-/> open http://localhost:9100/
-```
-
-- **Allow CORS in ES Core**
-
+	/> npm run start
+	```
+	- On your browser, open `http://localhost:9100/`
+	- Terminate CMD window
+* __Allow CORS in ES Core__
 While ES is running, head was not able to connect to ES because CORS request is disabled by default. We need to reconfigure ES allow CORS reqyests.
 
 ES disabled CORS requests by default from version 5.x. To make work with Head,  edit elasticsearch.yml and restart elasticsearch service.
 
-On new CMD window:
-```
-/> cd elk
-/> cd elasticsearch-6.2.2\config
-/> notepad++ elasticsearch.yml
-```
-	http.cors.enabled: true
-	http.cors.allow-origin: "*"
-``
-/> nssm restart "Elasticsearch - Core 6.2.2"
-``
+	- On new CMD window:
+	```
+	/> cd elk
+	/> cd elasticsearch-6.2.2\config
+	/> notepad++ elasticsearch.yml
+	```
+		http.cors.enabled: true
+		http.cors.allow-origin: "*"
+	``
+	/> nssm restart "Elasticsearch - Core 6.2.2"
+	``
+	- Terminate CMD window
 
-The gree cluster health indicator shows we have successfully paired Head with ES core.This means other plugins may not be able to connect to ES API.
+The green cluster health indicator shows we have successfully paired Head with ES core.This means other plugins may not be able to connect to ES API.
 
-- **Host as a windows service**
-Because we using ES v6.x, we have to host Head independent from ES web server. It's pretty simple with NSSM, but first we need to create a bootstrap file.
+* __Host as a windows service__
+	- On new CMD window:
+	```
+	/> cd c:\elk\elasticsearch-head
+	/> copy NUL RunMe.bat
+	/> notepad++ Runme.bat
+	```
+	- Put this code into RunMe.bat and save
+	```
+	cd /d %~dp0
+	npm start
+	```
+	- On new CMD window:
+	```
+	/> cd c:\elk\elasticsearch-head
+	/> nssm install "Elasticsearch - Head" c:\elk\elasticsearch-head\runme.bat
+	/> nssm set "Elasticsearch - Head" Start "SERVICE_DELAYED_AUTO_START"
+	/> nssm set "Elasticsearch - Head" Description "Head plugin for Elasticsearch"
+	/> nssm start "Elasticsearch - Head"
+	```
+	- Terminate CMD window
 
-On new CMD window:
-```
-/> cd c:\elk\elasticsearch-head
-/> copy NUL RunMe.bat
-/> notepad++ Runme.bat
-```
+#### Elastic HQ
 
-Put this code into RunMe.bat and save
-```
-cd /d %~dp0
-npm start
-```
+* __Download and build packages__
+	- On new CMD window:
+	```
+	/> cd elk
+	/> git clone https://github.com/ElasticHQ/elasticsearch-HQ.git
+	/> cd elasticsearch-hq
+	/> npm install
+	```
+	- Get the latest version of PIP
+	<br>Download and place this file on `C:\Program Files (x86)\Python 34\Tools\Scripts`
+	<br>https://bootstrap.pypa.io/get-pip.py
 
-On new CMD window:
-```
-/> cd c:\elk\elasticsearch-head
-/> nssm install "Elasticsearch - Head" c:\elk\elasticsearch-head\runme.bat
-/> nssm set "Elasticsearch - Head" Start "SERVICE_DELAYED_AUTO_START"
-/> nssm set "Elasticsearch - Head" Description "Head plugin for Elasticsearch"
-/> nssm start "Elasticsearch - Head"
-```
-
-#### 2. Elastic HQ
-http://www.elastichq.org/gettingstarted.html
-
-- **Download and build packages**
-
-On new CMD window:
-```
-/> cd elk
-/> git clone https://github.com/ElasticHQ/elasticsearch-HQ.git
-/> cd elasticsearch-hq
-/> npm install
-```
-
-Get the latest version of PIP
-Download and place this file on C:\Program Files (x86)\Python 34\Tools\Scripts
-https://bootstrap.pypa.io/get-pip.py
-
-On new CMD window:
-```
-/> python C:\Program Files (x86)\Python 34\Tools\Scripts\get-pip.py
-/> pip install -r requirements.txt
-```
-
-- **Dry-run service**
-
-On new CMD window:
-```
-/> python application.py
-```
-
-http://localhost:5000/
-http://localhost:5000/api
-
-- **Host as a windows service**
-
-On new CMD window:
-```
-/> cd c:\elk\elasticsearch-hq
-/> copy NUL RunMe.bat
-/> notepad++ Runme.bat
-```
-
-Put this code into RunMe.bat and save
-```
-cd /d %~dp0
-python application.py
-```
-
-On new CMD window:
-```
-/> cd <elasticsearch-hq-folder>
-/> nssm install "Elasticsearch - HQ" c:\elk\elasticsearch-hq\runme.bat
-/> nssm set "Elasticsearch - HQ" Start "SERVICE_DELAYED_AUTO_START"
-/> nssm set "Elasticsearch - HQ" Description "Elasticsearch-HQ plugin for Elasticsearch"
-/> nssm start "Elasticsearch - HQ"
-```
+	- On new CMD window:
+	```
+	/> python C:\Program Files (x86)\Python 34\Tools\Scripts\get-pip.py
+	/> pip install -r requirements.txt
+	```
+* __Dry-run service__
+	- On new CMD window:
+	```
+	/> python application.py
+	```
+	- On your browser, open `http://localhost:5000/`
+	- Terminate CMD window
+* __Host as a windows service__
+	- On new CMD window:
+	```
+	/> cd c:\elk\elasticsearch-hq
+	/> copy NUL RunMe.bat
+	/> notepad++ Runme.bat
+	```
+	- Put this code into RunMe.bat and save
+	```
+	cd /d %~dp0
+	python application.py
+	```
+	- On new CMD window:
+	```
+	/> cd <elasticsearch-hq-folder>
+	/> nssm install "Elasticsearch - HQ" c:\elk\elasticsearch-hq\runme.bat
+	/> nssm set "Elasticsearch - HQ" Start "SERVICE_DELAYED_AUTO_START"
+	/> nssm set "Elasticsearch - HQ" Description "Elasticsearch-HQ plugin for Elasticsearch"
+	/> nssm start "Elasticsearch - HQ"
+	```
+	- Terminate CMD window
 
 Noted Challenges
 ------
