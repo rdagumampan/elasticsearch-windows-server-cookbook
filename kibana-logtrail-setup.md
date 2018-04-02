@@ -56,6 +56,8 @@ Restart Kibana and wait for few seconds
 /> nssm restart "Elasticsearch - Kibana 6.2.2"
 ```
 
+![test](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/screenshot-kibana-plugin-logtrail.PNG "")
+
 Watch-out for:
 If after configuring plugin, Kibana became inaccessible, its probobly dead.If you have syntax error in the logtrail.json file, it will crash Kibana.To figure out the error, stop Kibana service and run as console from CMD. It will show the error.
 
