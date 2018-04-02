@@ -101,7 +101,7 @@ C:\Program Files (x86)\Python34\Scripts
 / echo %PATH%
 ```
 
-### Readiness check
+**Readiness check**
 - At this point you should have access to the following commands in your CMD window
 ```
 - git --help
