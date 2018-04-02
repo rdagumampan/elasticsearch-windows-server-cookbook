@@ -87,6 +87,9 @@ class Program
 ```
 
 6. Run the service for at least 1 minute
+
+![](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/screenshot-demo-csharp-project.PNG "")
+
 7. Check our indices and logs
 8. Check with Elastic HQ on status of our clusters
 9. Visualize in Kibana
