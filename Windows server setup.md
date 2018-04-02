@@ -1,4 +1,4 @@
-### Background
+ALT-Background
 ------
 
 In my team, we have setup principle that we should "keep our hands off" from the application servers. The idea is to manage as much as possible from a automation scripts or GUI to reduce risk of human errors. Each active RDP session also consumes precious RAM and CPU from application servers. And the first thing that drives developers to the server is checking log files. Let's strike that down.
@@ -12,7 +12,7 @@ Now, there are many different ways to achieve a cetralized logging infrastructur
 
 While we are evaluating AppInsights and AppDynamics at enterprise level, I can't can't wait before something gets signed. We got to do something as our services grows every sprint. We are moving to ELK.
 
-### Objectives
+ALT-Objectives
 ------
 
 The purpose of this entry is to give you a defintive guide in setting up your Elasticsearch+Logstach+KIbana (ELK) stack on an on-premise servers including my preferred open source plugins and management tools. The guide will not cover securing your nodes and using commercial tools like x-pack, sematext as I think they deserve another entry. 
@@ -38,7 +38,8 @@ Important:
 Estimate TAT:
 - 2 hours
 
-### III. Install required runtime and supporting tools
+ALT-Install required runtime and supporting tools
+------
 
 1. Fire-up your windows server
 
@@ -115,7 +116,9 @@ C:\Program Files (x86)\Python34\Scripts
 - You environment system PATH should be
 - Your ELK folder should look like this
 
-### IV. Install ELK stack
+ALT-Install ELK stack
+------
+
 #### Install Elasticsearch 6.2.2
 
 Dry-run ES**
@@ -173,7 +176,8 @@ On new CMD window:
 ...Run Kibana
 ...http://localhost:5601/
 
-## V. Install ELK tools and Kibana plugins
+ALT-Install ELK tools and Kibana plugins
+------
 
 #### 1. Head
 https://github.com/mobz/elasticsearch-head
@@ -298,23 +302,30 @@ On new CMD window:
 /> nssm start "Elasticsearch - HQ"
 ```
 
-### VI. Noted Challenges
+ALT-Noted Challenges
+------
 - Since ES has removed direct suppport for plugins from 5.x, it has been lotmore difficult to setup plugins for ES. We are given two choices: setup plugin as native to Kibana or self-host in a web server.
 
 - ELK tools are very much dependent to the version of ES. This means we need to always keep an eye on the compatibility matrix to make sure we dont' break things when we upgrade ES or the plugins we use.
 
 - Several open tools requires that we build the packages ourself. Because they are built from different tools, we have to prepare and install their dependencies like python, pip, setuptools, cx_Freeze etc...
 
-### VIII. Next Steps
+ALT-Next Steps
+------
+
 - Verify setup with demo microservice
 - Tail logs with **LogTrail**
 - Maintaining indices with **curator** or my pet project **esix**
 
-### IX. Feedback
+ALT-Feedback
+------
+
 - Twitter: @rdagumampan
 - Email: rdagumampan|AT|gmail.com
 
-### X. References
+ALT-References
+------
+
 Kibana Plugins
 <br>https://www.elastic.co/guide/en/kibana/current/known-plugins.html
 
