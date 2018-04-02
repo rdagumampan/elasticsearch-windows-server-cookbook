@@ -91,10 +91,25 @@ class Program
 ![](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/screenshot-demo-csharp-project.PNG "")
 
 7. Check our indices and logs
+
+![](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/screenshot-demo-csharp-project-head.PNG "")
+
 8. Check with Elastic HQ on status of our clusters
+
+![](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/screenshot-demo-csharp-project-hq.PNG "")
+
 9. Visualize in Kibana
-Go to Management > Advanced Settings
+
+![](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/screenshot-demo-csharp-project-kibana-01.PNG "")
+
+![](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/screenshot-demo-csharp-project-kibana-02.PNG "")
+
+![](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/screenshot-demo-csharp-project-kibana-03.PNG "")
+
+10. Go to Management > Advanced Settings
 MM-DD-YYYY HH:mm:ss
+
+![](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/screenshot-demo-csharp-project-kibana-04.PNG "")
 
 References:
 
