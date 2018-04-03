@@ -21,7 +21,7 @@ Pre-requisite:
 /> copy logtrail.json logtrail_backup.json
 /> notepad++ logtrail.json
 ```
-
+The `mapping` and `message_format` must be one of the fields in your ES index. 
 ```json
 #copy full json data and replace the existing
 {
@@ -53,7 +53,6 @@ Pre-requisite:
   ]
 }
 ```
-NOTE: The `mapping` and `message_format` must be one of the fields in your ES index. 
 - Restart Kibana and wait for few seconds
 ```
 /> nssm restart "Elasticsearch - Kibana 6.2.2"
