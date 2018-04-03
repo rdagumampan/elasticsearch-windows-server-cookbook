@@ -1,4 +1,4 @@
-#### Serilog/ElasticSearch Strucutured Logging
+#### Setting-up Serilog/ElasticSearch Strucutured Logging
 
 The fastest way to the reap full benefits of ES in your .NET service is starting logging responsibly and use Serilog. Serilog is a structured logging framework where log carries structured contextual information or payload. This is not tutorial on Serilog, instead I advise you start reading [Serilog Wiki](https://github.com/serilog/serilog).
 
