@@ -1,9 +1,9 @@
 
-### Setting-up Kibana/LogTrail plugin
+### Setting-up ElasticSearch/Kibana/LogTrail
 
 [BareTail](https://www.baremetalsoft.com/baretail/) is one of my best-loved tools in tailing logs when we starts using ES but a little digging gives me LogTrail. It's great that someone made great work to support this in Kibana as a plugin, hats-off to [@sivasamyk](https://github.com/sivasamyk)!
 
-Pre-requisite:
+Pre-requisites:
 	- We need the exact version of Kibana you're running, in my case I had v6.2.2. To view releases that matches your installation visit this https://github.com/sivasamyk/logtrail/releases
 	- We will re-use the log format in the previous demo project HelloworldElk
 
