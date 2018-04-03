@@ -303,9 +303,9 @@ Next Steps
 
 Feedback
 ------
-- Twit me on: @rdagumampan
+- Twit me on: [@rdagumampan](https://twitter.com/rdagumampan)
 - Drop a mail: rdagumampan|AT|gmail.com
-- Or create an issue here, I'll try to response as soon as I can
+- Or [create an issue](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/issues) here, I'll try to response as soon as I can
 
 References
 ------
@@ -320,12 +320,5 @@ Management and monitoring
 
 Elasticeach metrics to watch
 <br>https://www.oreilly.com/ideas/10-elasticsearch-metrics-to-watch
-
-<br>http://ikeptwalking.com/structured-logging-using-serilog/
-<br>https://bitnami.com/stack/elk/installer
-<br>https://logz.io/learn/complete-guide-elk-stack/
-<br>https://qbox.io/blog/how-to-elasticsearch-logstash-kibana-manage-logs
-
-<br>https://code972.com/blog/2016/04/97-the-definitive-guide-for-elasticsearch-2-x-on-microsoft-azure
 
 v0.1.0
