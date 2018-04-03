@@ -15,6 +15,7 @@ As I'm learning ELK and trying to put this into operational use, I am documentin
 - Scale out your clusters (WIP)
 
 #### Feedback
-Twit me on: @rdagumampan
-Drop a mail: rdagumampan|AT|gmail.com
-Or create an issue here, I'll try to response as soon as I can
+
+- Twit me on: @rdagumampan
+- Drop a mail: rdagumampan|AT|gmail.com
+- Or create an issue here, I'll try to response as soon as I can
