@@ -10,17 +10,17 @@ Now, there are many different ways to achieve a cetralized logging infrastructur
 3. Instrument your code using much more sophisticated commercial tools like Application Insights, AppDynamics, New Relic.
 4. Pickup from community like Elasticsearch + Logstash + Kibana (ELK).
 
-While we are evaluating AppInsights and AppDynamics at enterprise level, I can't can't wait before something gets signed. We got to do something as our services grows every sprint. We are moving to ELK.
+While we are evaluating AppInsights and AppDynamics at enterprise level, I can't wait before something gets signed. We got to do something as our services grows every sprint and it's disturbance managing logs from several servers. We are moving to ELK.
 
 Objectives
 ------
 
-The purpose of this entry is to give you a defintive guide in setting up your Elasticsearch+Logstach+KIbana (ELK) stack on an on-premise servers including my preferred open source plugins and management tools. The guide will not cover securing your nodes and using commercial tools like x-pack, sematext as I think they deserve another entry. 
+The purpose of this entry is to give you a defintive guide in setting up your Elasticsearch+Logstach+KIbana (ELK) stack on an on-premise servers including my preferred open source plugins and management tools. This guide does not cover securing your nodes and using commercial tools like x-pack, sematext as I think they deserve another entry. 
 
 In summary, we will:
-1. Setup ELK stack
-2. Setup plugins and management tools (Head, HQ, curator, esix)
-3. Dry-run with demo .NET application/service
+1. Setup an ELK stack on on-premise server
+2. Setup management tools and kibana plugins (Head, HQ, curator, esix)
+3. Dry-run with small C#/.NET application/service
 4. Backup log data (WIP)
 5. Clean-up old log data (WIP)
 6. Recommend further reading
@@ -28,12 +28,12 @@ In summary, we will:
 Pre-requsites:
 
 - Windows Server 2012+
-- Server must have access to the internet to download packages
+- The server must have access to the internet to download packages
 - You must have Admin privilege in the server
 
 Important:
-- Always re-start Command Prompt when you made changes to environment variables
-- Choose the version of ES and Kibana (they have to be of the same version. In this artictle, we're using v6.2.2.
+- Always re-start Command Prompt (CMD) after changing the system environment variables
+- Choose your version of ES and Kibana. They must have the same version. In this guide, we're using v6.2.2.
 
 Estimate TAT:
 - 2 hours
@@ -42,6 +42,7 @@ Install required runtime and supporting tools
 ------
 
 1. Fire-up your windows server
+<br>I tested this guide on an Azure Standard D3 VM (4 vcpus, 14 GB memory).
 
 2. Run CMD as Administrator mode
 ```
@@ -52,16 +53,16 @@ Install required runtime and supporting tools
 /> md _installers
 ```
 
-3. Download and install **git** for windows x64
-<br>https://git-scm.com/download/win
-<br>Add git path to PATH system environment variable
+3. Download and install **git for windows** x64
+- Packages from https://git-scm.com/download/win
+- Add git path to PATH system environment variable
 
 4. Download and install **Notepad++** x64
-<br>https://notepad-plus-plus.org/download/v7.5.6.html
+<br>Packages from https://notepad-plus-plus.org/download/v7.5.6.html
 <br>Add Notepad++ path to PATH system environment variable
 
 5. Download and install **JRE** x64
-<br>http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
+<br>Packages from http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
 <br>Set JAVA_HOME system environment variable
 ```
 /> echo %JAVA_HOME%
