@@ -7,10 +7,10 @@ This guide documents the step-by-step process we went though in putting up ELK i
 
 #### Scope of work
 
-- Setup a Windows Server to host ELK
-- Configure a C#/.NET application to sink to ES
-- Tail your logs with LogTrail
-- Configure archiving and index maintenance (WIP)
+- [Setup Windows Server to host ELK](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/01%20Setup-windows-server-with-elk.md)
+- [Run a C#/.NET application to sink to ES](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/02%20Run-net-c%23-service-application-sink-to-elk.md)
+- [Tail your logs with Kibana/LogTrail](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/03%20Tail-your-logs-with-kibana-logtrail.md)
+- Remove old indexes and manage your clusters (WIP)
 - Secure your server (WIP)
 - Scale out your clusters (WIP)
 
