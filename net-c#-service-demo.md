@@ -15,7 +15,7 @@ Install-Package Serilog.Sinks.Elasticsearch
 ```csharp
   <appSettings>
     <add key="serilog:using" value="Serilog.Sinks.Elasticsearch" />
-    <add key="serilog:write-to:Elasticsearch.nodeUris" value="http://orstedelk.eastus.cloudapp.azure.com:9200/" />
+    <add key="serilog:write-to:Elasticsearch.nodeUris" value="http://ardilabsserverelk.eastus.cloudapp.azure.com:9200/" />
     <add key="serilog:write-to:Elasticsearch.indexFormat" value="hello-world-elk-dev-{0:yyyy.MM}" />
     <add key="serilog:write-to:Elasticsearch.templateName" value="serilog-events-template" />
   </appSettings>
