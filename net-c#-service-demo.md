@@ -1,5 +1,10 @@
+#### Serilog/ElasticSearch Strucutured Logging
 
-1. Create console app C# project
+The fastest way to the reap full benefits of ES in your .NET service is starting logging responsibly and use Serilog. Serilog is a structured logging framework where log carries structured contextual information or payload. This is not tutorial on Serilog, instead I advise you start reading [Serilog Wiki](https://github.com/serilog/serilog).
+
+#### HellWorldELK
+
+1. Create a console app C# project
 
 2. Add the following packages
 
@@ -111,6 +116,6 @@ MM-DD-YYYY HH:mm:ss
 
 ![](https://github.com/rdagumampan/elasticsearch-windows-server-cookbook/blob/master/screenshot-demo-csharp-project-kibana-04.PNG "")
 
-References:
+#### References:
 
 v0.10
