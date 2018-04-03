@@ -54,57 +54,57 @@ Install required runtime and supporting tools
 ```
 
 3. Download and install **git for windows** x64
-- Packages from https://git-scm.com/download/win
-- Add git path to PATH system environment variable
+	- Packages from https://git-scm.com/download/win
+	- Add git path to PATH system environment variable
 
 4. Download and install **Notepad++** x64
-<br>Packages from https://notepad-plus-plus.org/download/v7.5.6.html
-<br>Add Notepad++ path to PATH system environment variable
+	- Packages from https://notepad-plus-plus.org/download/v7.5.6.html
+	- Add Notepad++ path to PATH system environment variable
 
 5. Download and install **JRE** x64
-<br>Packages from http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
-<br>Set JAVA_HOME system environment variable
-```
-/> echo %JAVA_HOME%
-```
+	- Packages from http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
+	- Set JAVA_HOME system environment variable
+	```
+	/> echo %JAVA_HOME%
+	```
 6. Download and install **NodeJS** x64
-<br>https://nodejs.org/en/download/
-```
-/> node -v
-/> npm -v
-/> npm install
-```
+	- Packages from https://nodejs.org/en/download/
+	```
+	/> node -v
+	/> npm -v
+	/> npm install
+	```
 7. Download and install **Python** x86/x64
-<br>Choose the Windows MSI installer
-<br>https://www.python.org/downloads/
-<br>Add Python path into PATH system environment variable
-`
-C:\Program Files (x86)\Python34
-C:\Program Files (x86)\Python34\Scripts
-`
-```
-/> echo %PATH%
-```
+	- Choose the Windows MSI installer
+	- Packages from https://www.python.org/downloads/
+	- Add Python path into PATH system environment variable
+	`
+	C:\Program Files (x86)\Python34
+	C:\Program Files (x86)\Python34\Scripts
+	`
+	```
+	/> echo %PATH%
+	```
 8. Download **Python/pip**
-<br>https://bootstrap.pypa.io/get-pip.py
-<br>Copy file into `C:\Program Files (x86)\Python34\Scripts`
+	- Packages from https://bootstrap.pypa.io/get-pip.py
+	- Copy file into `C:\Program Files (x86)\Python34\Scripts`
 
 9. Download **ElasticSearch** 6.2.2
-<br>https://www.elastic.co/downloads/elasticsearch
-<br>Extract files into `C:\elk\`
+	- Packages from https://www.elastic.co/downloads/elasticsearch
+	- Extract files into `C:\elk\`
 
 10. Download **Kibana** 6.2.2
-<br>https://www.elastic.co/downloads/kibana
-<br>Extract file into `C:\elk\`
+	- Packages from https://www.elastic.co/downloads/kibana
+	- Extract file into `C:\elk\`
 
 11. Download NSSM
-<br>NSSM is required to make it so "Logstash" and "Kibana" can run as windows services.
-<br>https://nssm.cc/download
-<br>Extract the files into 'c:\elk\'
-<br>Add NSSM path to PATH system environment variable
-```
-/> echo %PATH%
-```
+NSSM is required to make it so "Logstash" and "Kibana" can run as windows services.
+	- Packages from https://nssm.cc/download
+	- Extract the files into 'c:\elk\'
+	- Add NSSM path to PATH system environment variable
+	```
+	/> echo %PATH%
+	```
 
 **Readiness check**
 - At this point you should have access to the following commands in your CMD window
