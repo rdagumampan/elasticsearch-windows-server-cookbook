@@ -203,9 +203,12 @@ While ES is running, Head was not able to connect to ES because CORS request is 
 	/> cd elasticsearch-6.2.2\config
 	/> notepad++ elasticsearch.yml
 	```
+	- Put code below into `elasticsearch.yml` file	
+	```
 		http.cors.enabled: true
 		http.cors.allow-origin: "*"
 	``
+	- Restart ES service
 	/> nssm restart "Elasticsearch - Core 6.2.2"
 	``
 	- Terminate CMD window
@@ -219,7 +222,7 @@ The green cluster health indicator shows we have successfully paired Head with E
 	/> copy NUL RunMe.bat
 	/> notepad++ Runme.bat
 	```
-	- Put this code into RunMe.bat and save
+	- Put this code into RunMe.bat
 	```
 	cd /d %~dp0
 	npm start
@@ -267,7 +270,7 @@ The green cluster health indicator shows we have successfully paired Head with E
 	/> copy NUL RunMe.bat
 	/> notepad++ Runme.bat
 	```
-	- Put this code into RunMe.bat and save
+	- Put this code into RunMe.bat
 	```
 	cd /d %~dp0
 	python application.py
@@ -285,9 +288,9 @@ The green cluster health indicator shows we have successfully paired Head with E
 Noted Challenges
 ------
 
-- Since ES has removed direct suppport for plugins from 5.x, it has been lotmore difficult to setup plugins for ES. We are given two choices: setup plugin as native to Kibana or self-host in a web server.
+- Since ES has removed direct suppport for we plugins from 5.x, it has taken little more effort to setup plugins. We are given two choices: setup plugin as native to Kibana or self-host in a web server.
 
-- ELK tools are very much dependent to the version of ES. This means we need to always keep an eye on the compatibility matrix to make sure we dont' break things when we upgrade ES or the plugins we use.
+- ELK tools are very much dependent on the version of ES. This means we need to always keep an eye on the compatibility matrix to make sure we dont' break things when we upgrade ES or the plugins we use.
 
 - Several open tools requires that we build the packages ourself. Because they are built from different tools, we have to prepare and install their dependencies like python, pip, setuptools, cx_Freeze etc...
 
@@ -300,9 +303,9 @@ Next Steps
 
 Feedback
 ------
-
-- Twitter: @rdagumampan
-- Email: rdagumampan|AT|gmail.com
+- Twit me on: @rdagumampan
+- Drop a mail: rdagumampan|AT|gmail.com
+- Or create an issue here, I'll try to response as soon as I can
 
 References
 ------
