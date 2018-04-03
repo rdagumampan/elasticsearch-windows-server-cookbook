@@ -1,7 +1,7 @@
 ElasticSearch-Windows-Server-Cookbook
 -----
 
-While there are many documentation and blog entries in setting up an operational ELK clusters, they are mostly annexed to Linux Servers or SaaS-based implementation. The truth is, the are still many software houses and internal development teams out there have yet to use cloud or have limited competency to manage nix servers. I hope this guide helps get started, improve your team capability and reap the benefits of ES in your tech stack.
+While there are many documentation and blog entries in setting up an operational ELK clusters, they are mostly annexed to Linux Servers or SaaS-based implementation. The truth is, the are still many software houses and internal development teams out there have yet to use cloud or have limited competency to manage nix servers. I hope this guide can help you get started, improve your team capability and reap the benefits of ES in your tech stack.
 
 This guide documents the step-by-step process we went though in putting up ELK into operational use.
 
