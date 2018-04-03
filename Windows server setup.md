@@ -42,9 +42,9 @@ Install required runtime and supporting tools
 ------
 
 1. Fire-up your windows server
-<br>I tested this guide on an Azure Standard D3 VM (4 vcpus, 14 GB memory).
+I tested this guide on an Azure Standard D3 VM (4 vcpus, 14 GB memory).
 
-2. Run CMD as Administrator mode
+2. Run CMD in Administrator mode
 ```
 /> d:
 /> md elk
@@ -89,18 +89,18 @@ Install required runtime and supporting tools
 	- Packages from https://bootstrap.pypa.io/get-pip.py
 	- Copy file into `C:\Program Files (x86)\Python34\Scripts`
 
-9. Download **ElasticSearch** 6.2.2
+9. Download **ElasticSearch 6.2.2**
 	- Packages from https://www.elastic.co/downloads/elasticsearch
 	- Extract files into `C:\elk\`
 
-10. Download **Kibana** 6.2.2
+10. Download **Kibana 6.2.2**
 	- Packages from https://www.elastic.co/downloads/kibana
 	- Extract file into `C:\elk\`
 
 11. Download NSSM
 NSSM is required to make it so "Logstash" and "Kibana" can run as windows services.
 	- Packages from https://nssm.cc/download
-	- Extract the files into 'c:\elk\'
+	- Extract the files into `\elk\`
 	- Add NSSM path to PATH system environment variable
 	```
 	/> echo %PATH%
@@ -114,7 +114,7 @@ NSSM is required to make it so "Logstash" and "Kibana" can run as windows servic
 /> python --help
 /> nssm -help
 ```
-- You environment system PATH should have git, Notepad++, NodeJS, Phyton and NSSM 
+- You environment system PATH should have `git`, `Notepad++`, `NodeJS`, `Phyton` and `NSSM` paths 
 - Your ELK folder should look like this
 
 Install ELK stack
@@ -144,7 +144,7 @@ Install ELK stack
 	- Check ES nodes status `http://localhost:9200/_nodes?pretty=true`
 	- Terminate CMD window
 
-	**NOTE:** It helps to be explicit on the version of ES. This guide's us in determinining compatbility of our plugins and suppporting software.
+	**NOTE:** It helps to be explicit on the version of ES. This guide's us in determinining compatibility of our plugins and suppporting software.
 
 #### Install Kibana 6.2.2
 
@@ -169,13 +169,14 @@ Install ELK stack
 	- On your browser, open `http://localhost:5601/`
 	- Terminate CMD window
 
-	**NOTE:** It helps to be explicit on the version of Kibana. This guide's us in determinining compatbility of our plugins.
+	**NOTE:** It helps to be explicit on the version of Kibana. This guide's us in determinining compatibility of our plugins.
 
 Install ELK tools and Kibana plugins
 ------
-Since ES v5.x, ES have have stopped supporting plugins in it core installation.This is to shield ES from attacks and vulnerabilities that may be expose by plugins. This means we have host our plugins independently. It's pretty simple with NSSM, but first we need to create a bootstrap file for each plugins.
+Since v5.x, ES have have stopped supporting site plugins in its core installation. Site plugins are those with HTML+CSS files. According to Elastic, this is to protect ES from attacks and vulnerabilities that may be carried by the plugins. This means we have host our web plugins independently and it's pretty simple with NSSM. Bt first, we need to create a bootstrap file for each plugin.
 
 #### Head
+Head is your old school GUI for ES. It's simple and it just works for most of my tasks. ES is REST-based, so technically you can do pretty much everything with Head. For details visit https://github.com/mobz/elasticsearch-head.
 
 * __Download and build packages__
 	- On new CMD window:
@@ -194,9 +195,7 @@ Since ES v5.x, ES have have stopped supporting plugins in it core installation.T
 	- On your browser, open `http://localhost:9100/`
 	- Terminate CMD window
 * __Allow CORS in ES Core__
-While ES is running, head was not able to connect to ES because CORS request is disabled by default. We need to reconfigure ES allow CORS reqyests.
-
-ES disabled CORS requests by default from version 5.x. To make work with Head,  edit elasticsearch.yml and restart elasticsearch service.
+While ES is running, Head was not able to connect to ES because CORS request is disabled by default. We need to reconfigure ES allow CORS. To fix this, edit `elasticsearch.yml` and restart ES service.
 
 	- On new CMD window:
 	```
@@ -307,6 +306,7 @@ Feedback
 
 References
 ------
+https://www.elastic.co/blog/running-site-plugins-with-elasticsearch-5-0
 
 Kibana Plugins
 <br>https://www.elastic.co/guide/en/kibana/current/known-plugins.html
