@@ -1,8 +1,7 @@
 
 ### Setting-up Kibana/LogTrail plugin
 
-[BareTail](https://www.baremetalsoft.com/baretail/) is one of my best-loved tools in tailing logs I have to let it go. A little digging gives me LogTrail.
-It's great that someone made great work to support this in Kibana as plugin, hats-off to [@sivasamyk](https://github.com/sivasamyk).
+[BareTail](https://www.baremetalsoft.com/baretail/) is one of my best-loved tools in tailing logs when we starts using ES but a little digging gives me LogTrail. It's great that someone made great work to support this in Kibana as a plugin, hats-off to [@sivasamyk](https://github.com/sivasamyk)!
 
 Pre-requisite:
 	- We need the exact version of Kibana you're running, in my case I had v6.2.2. To view releases that matches your installation visit this https://github.com/sivasamyk/logtrail/releases
@@ -66,7 +65,7 @@ Pre-requisite:
 
 #### Watch-out for
 
-If after configuring plugin, Kibana became inaccessible, its probobly dead.If you have syntax error in the logtrail.json file, it will crash Kibana.To figure out the error, stop Kibana service and run as console from CMD. It will show the error.
+If after configuring the plugin Kibana became inaccessible, its probobly dead.If you have syntax error in the `logtrail.json` file, it will crash Kibana.To figure out the error, stop Kibana service and run from CMD. It will show the error.
 
 #### References:
 
